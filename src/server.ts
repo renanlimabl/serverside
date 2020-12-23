@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 // Necessário para que o express reconheça os erros das rotas e utilize o middleware de erros.
 import 'express-async-errors';
 
@@ -11,6 +12,7 @@ import './database';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
