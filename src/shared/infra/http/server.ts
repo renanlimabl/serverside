@@ -4,11 +4,11 @@ import cors from 'cors';
 // Necessário para que o express reconheça os erros das rotas e utilize o middleware de erros.
 import 'express-async-errors';
 
+import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppError';
 import routes from './routes';
-import uploadConfig from './config/upload';
-import AppError from './errors/AppError';
 
-import './database';
+import '@shared/infra/typeorm';
 
 const app = express();
 

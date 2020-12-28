@@ -1,6 +1,6 @@
 // Rotas: Receber uma requisição, chamar outro arquivo e devolver uma resposta
 import { Router } from 'express';
-import AuthenticateUserServices from '../services/AuthenticateUserService';
+import AuthenticateUserServices from '@modules/users/services/AuthenticateUserService';
 
 const sessionsRouter = Router();
 
