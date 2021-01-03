@@ -1,8 +1,7 @@
 import { startOfHour } from 'date-fns';
-import { getCustomRepository } from 'typeorm';
 import AppError from '@shared/errors/AppError';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
-import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequestDTO {
   provider_id: string;
@@ -11,25 +10,28 @@ interface IRequestDTO {
 
 /**
  * (S)olid
- * Single Resposability Principle
- * - Cada arquivo tem uma única responsabilidade.
- *
+ * - Single Resposability Principle
+ * Cada arquivo tem uma única responsabilidade.
+ * so(L)id
+ * - Liskov Substituion Principle
  * soli(D)
- * Dependecy Inversion Principe
+ * - Dependecy Inversion Principe
  * Espera um repositório,
  * então no constructor ele irá receber como parâmetro o arquivo que ele espera,
  * no caso o repository.
+ * O arquivo que precisar utilizar o service (nesse projeto são as rotas) que vai ser responsável por mostrar qual repositório esse service vai receber.
  */
 class CreateAppointmentService {
+  // prettier-ignore
+  constructor(private appointmentsRepository: IAppointmentsRepository) { }
+
   public async execute({
     date,
     provider_id,
   }: IRequestDTO): Promise<Appointment> {
-    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
-
     const appointmentDate = startOfHour(date);
 
-    const findAppointmentInSameDate = await appointmentsRepository.findByDate(
+    const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
     );
 
@@ -37,7 +39,7 @@ class CreateAppointmentService {
       throw new AppError('This appointment is already booked');
     }
 
-    const appointment = await appointmentsRepository.create({
+    const appointment = await this.appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
     });
