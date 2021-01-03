@@ -1,4 +1,5 @@
 import { startOfHour } from 'date-fns';
+import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
@@ -21,9 +22,14 @@ interface IRequestDTO {
  * no caso o repository.
  * O arquivo que precisar utilizar o service (nesse projeto são as rotas) que vai ser responsável por mostrar qual repositório esse service vai receber.
  */
+
+@injectable()
 class CreateAppointmentService {
   // prettier-ignore
-  constructor(private appointmentsRepository: IAppointmentsRepository) { }
+  constructor(
+    @inject('AppointmetsRepository')
+    private appointmentsRepository: IAppointmentsRepository
+  ) { }
 
   public async execute({
     date,

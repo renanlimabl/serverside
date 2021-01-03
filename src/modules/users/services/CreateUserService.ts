@@ -1,5 +1,6 @@
 import { hash } from 'bcryptjs';
 import AppError from '@shared/errors/AppError';
+import { injectable, inject } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 
@@ -9,9 +10,13 @@ interface IRequestDTO {
   password: string;
 }
 
+@injectable()
 class CreateUserService {
   // prettier-ignore
-  constructor(private usersRepository: IUsersRepository) { }
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) { }
 
   public async execute({ name, email, password }: IRequestDTO): Promise<User> {
     const checkUsersExists = await this.usersRepository.findByEmail(email);

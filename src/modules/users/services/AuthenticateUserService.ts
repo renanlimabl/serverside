@@ -2,6 +2,7 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
+import { injectable, inject } from 'tsyringe';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 import User from '../infra/typeorm/entities/User';
@@ -16,9 +17,14 @@ interface IResponseDTO {
   token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
   // prettier-ignore
-  constructor(private usersRepository: IUsersRepository) { }
+
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) { }
 
   public async execute({
     email,

@@ -1,7 +1,7 @@
 // Rotas: Receber uma requisição, chamar outro arquivo e devolver uma resposta
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
-import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
+import { container } from 'tsyringe';
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
@@ -29,10 +29,9 @@ appointmentsRouter.post('/', async (request, response) => {
    * const = appointmentsRepository.
    * Então basta instanciar o Service e passar o appointmentsRepository como parâmetro
    */
-  const appointmentsRepository = new AppointmentsRepository();
-  const createAppointment = new CreateAppointmentService(
-    appointmentsRepository,
-  );
+
+  // const createAppointment = new CreateAppointmentService();
+  const createAppointment = container.resolve(CreateAppointmentService);
 
   const appointment = await createAppointment.execute({
     date: parsedDate,
