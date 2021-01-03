@@ -6,7 +6,6 @@ import CreateAppointmentService from '@modules/appointments/services/CreateAppoi
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
 
 /**
  * SoC: Separation of Concerns (Separação de Preocupações)
@@ -30,7 +29,7 @@ appointmentsRouter.post('/', async (request, response) => {
    * const = appointmentsRepository.
    * Então basta instanciar o Service e passar o appointmentsRepository como parâmetro
    */
-
+  const appointmentsRepository = new AppointmentsRepository();
   const createAppointment = new CreateAppointmentService(
     appointmentsRepository,
   );
