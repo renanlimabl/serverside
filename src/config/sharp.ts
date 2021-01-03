@@ -4,6 +4,7 @@ import sharp from 'sharp';
 
 export default function Sharp(request: Request, response: Response): void {
   // const compressedImagefileSavePath = path.join(__dirname, '../', 'teste');
+  // todo fazer esse arquivo de middleware
   const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp', 'teste.jpg');
 
   sharp(request.file.path)
