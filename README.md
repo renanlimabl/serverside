@@ -35,11 +35,38 @@
 # PAINEL DO PRESTADOR
 
 ** REQUISITOS FUNCIONAIS **
+
+- O usuário deve poder listar seus agendamentos de um dia específico
+- O prestador deve receber uma notificação sempre que houver um novo agendamento.
+- O prestador deve poder visualizar as notificações não lidas.
+
 ** REQUISITOS NÃO FUNCIONAIS **
+
+- Os agendamentos do prestador do dia devem ser armazenados em cache;
+- As notificações do prestador devem ser armazenadas no MongoDB;
+- As notificações do prestador devem ser enviadas em tempo-real utilizando Socket.io;
+
 ** REGRAS DE NEGÓCIO **
+
+- A notificação deve ter um status de lida ou não lida para que o prestador possa controlar.
 
 # AGENDAMENTO DE SERVIÇOS
 
 ** REQUISITOS FUNCIONAIS **
+
+- O usuário deve poder listar poder listar todos prestadores de serviços cadastrados;
+- O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um prestador;
+- O usuaŕio deve poder listar os horários disponíveis de um dia específico de um prestador;
+- O usuário deve poder realizar um novo agendamento com um prestador;
+
 ** REQUISITOS NÃO FUNCIONAIS **
+
+- A listagem de prestadores deve ser armazenada em cache;
+
 ** REGRAS DE NEGÓCIO **
+
+- Cada agendamento deve durar uma hora;
+- Os agendamentos devem estar disponíveis entre as 8h as 18h. (último agendamento às 17);
+- O usuário não pode agendar em um horário já ocupado.
+- O usuário não pode agendar em um horário que já passou.
+- O usuário não pode agendar serviços consigo mesmo.
