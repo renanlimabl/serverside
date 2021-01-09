@@ -2,9 +2,9 @@
 
 ** REQUISITOS FUNCIONAIS **
 
-- O usuário deve poder recuperar sua senha informando seu e-mail;
-- O usuário deve receber um e-mail com instruções de recuperação de senha;
-- O usuário deve poder resetar sua senha;
+- O usuário deve poder recuperar sua senha informando seu e-mail [X];
+- O usuário deve receber um e-mail com instruções de recuperação de senha [];
+- O usuário deve poder resetar sua senha [];
 
 ** REQUISITOS NÃO FUNCIONAIS **
 
@@ -16,7 +16,6 @@
 
 - O link enviado por email para resetar senha deve expirar em 2h;
 - O usuário precisa confirmar a nova senha ao resetar sua senha;
-
 # ATUALIZAÇÃO DO PERFIL
 
 ** REQUISITOS FUNCIONAIS **
