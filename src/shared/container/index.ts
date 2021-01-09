@@ -9,6 +9,9 @@ import AppointmetsRepository from '@modules/appointments/infra/typeorm/repositor
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
+// import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+// import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+
 // register = Toda vez que um arquivo utilizar, ele vai instanciar do 0,
 // registerSingleton = Ele instacia apenas 1 vez no ciclo da aplicação.
 container.registerSingleton<IAppointmentsRepository>(
